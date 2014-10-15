@@ -2,6 +2,7 @@ require 'colorize'
 load 'HTTPServer.rb'
 load 'HTTPConnection.rb'
 load 'version.rb'
+load 'driver.rb'
 
 module Hexcast
     puts "----> Starting Hexcast API server v#{VERSION}".green

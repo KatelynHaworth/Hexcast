@@ -10,20 +10,10 @@ module Hexcast
         end
         
         def handleVersionOneApi(view, controller, arguments)
-            puts "handle called for #{view}, attempting load"
-            first_load = require("hexcast/driver/#{view}")
-            
-            puts "first load? #{first_load}"
-            
-            driver_class = const_get(view)
-            driver = driver_class.new(self)
-            driver.verify_dependencies if first_load
-            
+            puts "calling load driver #{Driver}"
+            driver = Hexcast::Driver.load_driver(view, self)
+
             driver.handle(controller, arugments)
-        rescue UserError
-            raise
-        rescue LoadError, NameError
-            error("Cloud not load the '#{view}' driver. Please make sure it is installed and try again")
         end
         
         def respond(message)
